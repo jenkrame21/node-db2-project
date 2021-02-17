@@ -1,4 +1,4 @@
-const Dealer = require('../dealers/dealers-model.js');
+const Dealer = require('../api/dealers/dealers-model.js');
 
 module.exports = {
     checkId,

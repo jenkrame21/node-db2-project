@@ -52,3 +52,5 @@ router.delete('/:id', mw.checkId, async (req, res, next) => {
         next(error);
     }
 });
+
+module.exports = router;
