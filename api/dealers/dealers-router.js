@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Dealer = require("./dealers-model.js");
+const mw = require("../../middleware/middleware.js");
 
 router.get('/', async (req, res, next) => {
     try {
@@ -11,7 +12,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', mw.checkId, async (req, res, next) => {
     try {
         const { id } = req.params;
         const data = await Dealer.getById(id);
@@ -21,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', mw.checkPayload, async (req, res, next) => {
     try {
         const dealer = req.body;
         const data = await Dealer.create(dealer);
@@ -31,7 +32,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', mw.checkId, mw.checkPayload, async (req, res, next) => {
     try {
         const { id } = req.params;
         const changes = req.body;
@@ -42,7 +43,7 @@ router.put('/:id', async (req, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', mw.checkId, async (req, res, next) => {
     try {
         const { id } = req.params;
         const data = await Dealer.remove(id);
