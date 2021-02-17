@@ -8,17 +8,14 @@ module.exports = {
     remove
 };
 
-// GET - Get all dealers
 function get() {
     return db("dealers");
 }
 
-// GET - Get dealer by id
 function getById(id) {
     return db("dealers").where("id", id).first();
 }
 
-// POST - Create new dealer
 function create(dealer) {
     return db("dealers").insert(dealer)
         .then(([id]) => {
@@ -26,7 +23,6 @@ function create(dealer) {
         });
 }
 
-// PUT - Update dealer
 function update(id, dealer) {
     const dealerId = id
     return db("dealers").where("id", id).update(dealer)
@@ -35,7 +31,6 @@ function update(id, dealer) {
         });
 }
 
-// DELETE - Delete dealer
 function remove(id) {
     return db("dealers").where("id", id).del()
         .then(() => {
